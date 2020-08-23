@@ -1,8 +1,7 @@
 #include <string.h>
 #include <jni.h>
 
-jstring
-Java_com_plugin_jniecho_EchoJni_stringFromJNI( JNIEnv* env,
+jstring Java_com_plugin_jniecho_EchoJni_getABI( JNIEnv* env,
                                                   jobject thiz )
 {
 #if defined(__arm__)
@@ -37,5 +36,5 @@ Java_com_plugin_jniecho_EchoJni_stringFromJNI( JNIEnv* env,
    #define ABI "unknown"
 #endif
 
-    return (*env)->NewStringUTF(env, "Hello from JNI test !  Compiled with ABI " ABI ".");
+  return (*env)->NewStringUTF(env, ABI);
 }

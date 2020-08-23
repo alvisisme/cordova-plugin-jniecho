@@ -12,10 +12,9 @@ public class JniEcho extends CordovaPlugin {
     public boolean execute(String action, JSONArray data, CallbackContext callbackContext) throws JSONException {
 
         if (action.equals("greet")) {
-
-            String jniString = EchoJni.stringFromJNI();
+            String ABI = EchoJni.getABI();
             String name = data.getString(0);
-            String message = "Hello, " + name + ". JNI says: " + jniString;
+            String message = "Hello, " + name + ". JNI says: " + ABI;
             callbackContext.success(message);
 
             return true;
