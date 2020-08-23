@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
+        id="cordova-plugin-jniecho"
+        version="0.1.0">
+
+  <name>JniEcho</name>
+
+  <engines>
+    <engine name="cordova" version=">=3.4.0"/>
+  </engines>
+
+
+  <!-- asset字段指明需要复制到www目录的文件列表 -->
+  <asset src="www/jniecho.js" target="js/jniecho.js"/>
+  <!-- js-module字段指明自动注入到html文件的js文件 
+      src(string) 	References a file in the plugin directory relative to the plugin.xml file. 
+        If src does not resolve to an existing file, the CLI stops and reverses the installation, 
+        issues a notification of the problem, and exits with a non-zero code.
+      name(string)  Provides the last part of the module name. It can generally be whatever you like, 
+        and it only matters if you want to use cordova.require to import other parts of your plugins in your JavaScript code. 
+        The module name for a <js-module> is your plugin's id followed by the value of name.
+  -->
+  <js-module src="www/jniecho.js" name="JniEcho">
+    <!-- clobbers字段指明了挂载到windows下的模块名
+      target(string)	The namespace where module.exports gets inserted to.
+    -->
+    <clobbers target="jniecho" />
+  </js-module>
+
+  <platform name="android">
+    <!-- 修改cordova应用的config.xml配置 -->
+    <config-file target="res/xml/config.xml" parent="/*">
+      <!-- feature name 指明需要启用的插件名，见上方 name 字段 -->
+      <feature name="JniEcho">
+        <!-- android-package 指明插件所在包 -->
+        <param name="android-package" value="com.plugin.jniecho.JniEcho"/>
+      </feature>
+    </config-file>
+
+    <!-- 需要复制到android工程的java文件和so库, 务必先在jni目录下执行ndk-build命令重新生成so库 -->
+    <!-- java -->
+    <source-file src="src/android/java/com/plugin/jniecho/JniEcho.java" target-dir="src/com/plugin/jniecho/"/>
+    <source-file src="src/android/java/com/plugin/jniecho/EchoJni.java" target-dir="src/com/plugin/jniecho/" />
+    <!-- c/c++ libs -->
+    <source-file src="src/android/libs/arm64-v8a/libecho_jni.so" target-dir="libs/arm64-v8a/" />
+    <source-file src="src/android/libs/armeabi/libecho_jni.so" target-dir="libs/armeabi/" />
+    <source-file src="src/android/libs/armeabi-v7a/libecho_jni.so" target-dir="libs/armeabi-v7a/" />
+    <source-file src="src/android/libs/mips/libecho_jni.so" target-dir="libs/mips/" />
+    <source-file src="src/android/libs/mips64/libecho_jni.so" target-dir="libs/mips64/" />
+    <source-file src="src/android/libs/x86/libecho_jni.so" target-dir="libs/x86/" />
+    <source-file src="src/android/libs/x86_64/libecho_jni.so" target-dir="libs/x86_64/" />
+  </platform>
+
+</plugin>

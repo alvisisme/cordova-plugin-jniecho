@@ -1,0 +1,27 @@
+{
+    "name": "cordova-plugin-jniecho",
+    "version": "0.1.0",
+    "description": "Simple Cordova plugin that helps to echo the message from the jni.",
+    "cordova": {
+      "id": "cordova-plugin-jniecho",
+      "platforms": [
+        "android"
+      ]
+    },
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/alvisisme/cordova-plugin-jniecho.git"
+    },
+    "keywords": [
+      "ecosystem:cordova",
+      "cordova-android"
+    ],
+    "engines": [
+      {
+        "name": "cordova",
+        "version": ">=3.4.0"
+      }
+    ],
+    "author": "",
+    "license": "ISC"
+  }
